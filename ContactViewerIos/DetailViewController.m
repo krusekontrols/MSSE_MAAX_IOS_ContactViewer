@@ -38,9 +38,12 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        self.detailName.text = [self.detailItem name];
+        self.detailPhone.text = [self.detailItem phone];
+        self.detailTitle.text = [self.detailItem title];
+        self.detailEmail.text = [self.detailItem email];
+        self.detailTwitterId.text = [self.detailItem twitterId];
     }
 }
 
@@ -61,6 +64,12 @@
 
 - (void)viewDidUnload
 {
+    [self setDetailName:nil];
+    [self setDetailPhone:nil];
+    [self setDetailEmail:nil];
+    [self setDetailTitle:nil];
+    [self setDetailTwitterId:nil];
+    [self setDetailTitle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

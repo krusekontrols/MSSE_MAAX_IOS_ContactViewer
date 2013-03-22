@@ -168,4 +168,11 @@
 }
 */
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    DetailViewController *detailController =segue.destinationViewController;
+    Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
+    detailController.detailItem = ct;
+}
+
 @end
