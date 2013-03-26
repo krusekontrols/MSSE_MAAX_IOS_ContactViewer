@@ -59,6 +59,32 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(IBAction)onSaveContact:(id)sender {
+ 
+
+    NSString *nam = [self.detailItem name];
+    NSString *nam2 = self.detailName.text ;
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"save Contact"
+                                                    message:nam2 //@"You need to do something here"
+                                                   delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alert show];
+
+    
+    ///TODO  - need to save the edited value here! HOW?
+    
+    
+        // [self.detailItem name] = self.detailName.text ;
+  
+    
+ /*       if (self.detailItem) {
+          
+            [self setDetailName:self.detailName];
+        
+     }*/
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

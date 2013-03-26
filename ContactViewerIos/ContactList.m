@@ -21,6 +21,8 @@ static ContactList* _singleton = nil;
     return self;
 }
 
+//TODO Need a data store we can edit and save.
+
 +(void)initSingleton {
     _singleton = [[ContactList alloc] initWithCapacity:8];
     

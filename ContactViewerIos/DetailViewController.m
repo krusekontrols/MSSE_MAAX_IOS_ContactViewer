@@ -68,6 +68,7 @@
 
 - (void)viewDidUnload
 {
+    
     [self setDetailName:nil];
     [self setDetailPhone:nil];
     [self setDetailEmail:nil];

@@ -21,4 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *detailEmail;
 @property (weak, nonatomic) IBOutlet UITextField *detailTwitterId;
 
+// this gets called when the user taps the plus button above the list
+-(IBAction)onSaveContact:(id)sender;
 @end

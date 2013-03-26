@@ -182,7 +182,7 @@
     
     if([identifier isEqualToString:@"showDetail"])
     {
-        DetailViewController *detailController =segue.destinationViewController;
+        DetailViewController *detailController = segue.destinationViewController;
         Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
         detailController.detailItem = ct;
     }
