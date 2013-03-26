@@ -14,6 +14,10 @@
 
 @implementation EditViewController
 
+@synthesize detailItem = _detailItem;
+@synthesize detailDescriptionLabel = _detailDescriptionLabel;
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
    // self = [super initWithStyle:style];
@@ -27,11 +31,32 @@
 {
     [super viewDidLoad];
 
+    // Update the user interface for the detail item.
+    if (self.detailItem) {
+        self.detailName.text = [self.detailItem name];
+        self.detailPhone.text = [self.detailItem phone];
+        self.detailTitle.text = [self.detailItem title];
+        self.detailEmail.text = [self.detailItem email];
+        self.detailTwitterId.text = [self.detailItem twitterId];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload
+{
+    [self setDetailName:nil];
+    [self setDetailPhone:nil];
+    [self setDetailEmail:nil];
+    [self setDetailTitle:nil];
+    [self setDetailTwitterId:nil];
+    [self setDetailTitle:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +65,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -65,6 +91,8 @@
     
     return cell;
 }
+ */
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -105,17 +133,20 @@
 }
 */
 
+
+/*
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
+   
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
 }
+*/
 
 @end

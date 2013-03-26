@@ -14,12 +14,11 @@
 
 @property (strong, nonatomic) Contact *detailItem;
 
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailName;
-@property (weak, nonatomic) IBOutlet UILabel *detailTitle;
-
-@property (weak, nonatomic) IBOutlet UILabel *detailPhone;
-@property (weak, nonatomic) IBOutlet UILabel *detailEmail;
-@property (weak, nonatomic) IBOutlet UILabel *detailTwitterId;
+@property (strong, nonatomic) IBOutlet UITextField *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextField *detailName;
+@property (weak, nonatomic) IBOutlet UITextField *detailTitle;
+@property (weak, nonatomic) IBOutlet UITextField *detailPhone;
+@property (weak, nonatomic) IBOutlet UITextField *detailEmail;
+@property (weak, nonatomic) IBOutlet UITextField *detailTwitterId;
 
 @end

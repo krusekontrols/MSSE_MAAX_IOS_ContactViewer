@@ -125,4 +125,17 @@
     self.masterPopoverController = nil;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString *identifier = segue.identifier;
+    
+    if([identifier isEqualToString:@"showEdit"])
+    {
+        DetailViewController *detailController = segue.destinationViewController;
+        //Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
+        detailController.detailItem = self.detailItem;
+    }
+    
+    
+}
 @end
