@@ -12,9 +12,12 @@
 
 @class DetailViewController;
 
+@class EditViewController;
+
 @interface MasterViewController : UITableViewController <UITableViewDataSource>
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
+@property (strong, nonatomic) EditViewController *editViewController;
 
 @property (strong, nonatomic) ContactList* contacts;
 

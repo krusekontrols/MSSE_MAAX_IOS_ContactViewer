@@ -56,7 +56,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.90588241815567017" blue="0.58039218187332153" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
-                                    <segue destination="21" kind="push" id="r9g-Ic-fhs"/>
+                                    <segue destination="21" kind="push" identifier="showDetail" id="r9g-Ic-fhs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -198,7 +198,7 @@
                         <barButtonItem key="backBarButtonItem" title="Home" id="UiG-4M-9we"/>
                         <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="eep-BV-X8e">
                             <button key="customView" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tA4-Wo-pQn">
-                                <rect key="frame" x="244" y="0.0" width="71" height="44"/>
+                                <rect key="frame" x="245" y="7" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Edit">
@@ -209,7 +209,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0cB-Tw-dOD" kind="push" id="uK8-E9-AM9"/>
+                                    <segue destination="0cB-Tw-dOD" kind="push" identifier="showEdit" id="uK8-E9-AM9"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -226,25 +226,36 @@
             </objects>
             <point key="canvasLocation" x="869" y="64"/>
         </scene>
-        <!--View Controller - EditContact-->
+        <!--Edit View Controller - EditContact-->
         <scene sceneID="fvZ-Zu-lVq">
             <objects>
-                <viewController title="EditContact" id="0cB-Tw-dOD" sceneMemberID="viewController">
+                <viewController title="EditContact" id="0cB-Tw-dOD" customClass="EditViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aZy-sT-qz0">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Edit" id="NWn-YO-2a7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60A-3A-9tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="-227"/>
+            <point key="canvasLocation" x="1253" y="-319"/>
         </scene>
     </scenes>
     <classes>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailEmail" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailPhone" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailTwitterId" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EditViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="detailEmail" candidateClass="UILabel"/>

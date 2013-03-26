@@ -10,11 +10,17 @@
 
 #import "DetailViewController.h"
 
+#import "EditViewController.h"
+
 #import "Contact.h"
 
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
+
+//mek?
+@synthesize editViewController = _editViewController;
+
 @synthesize contacts;
 
 - (void)awakeFromNib
@@ -44,6 +50,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    self.editViewController = (EditViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
@@ -170,9 +178,16 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    DetailViewController *detailController =segue.destinationViewController;
-    Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
-    detailController.detailItem = ct;
-}
+    NSString *identifier = segue.identifier;
+    
+    if([identifier isEqualToString:@"showDetail"])
+    {
+        DetailViewController *detailController =segue.destinationViewController;
+        Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
+        detailController.detailItem = ct;
+    }
+    
+    
+    }
 
 @end
