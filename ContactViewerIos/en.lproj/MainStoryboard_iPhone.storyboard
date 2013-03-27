@@ -70,6 +70,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ih-1o-IbV">
                             <connections>
                                 <action selector="onAddContact:" destination="12" id="jsa-Z6-qSu"/>
+                                <segue destination="0cB-Tw-dOD" kind="push" id="OdR-Tb-2H9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -348,7 +349,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="60A-3A-9tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="-319"/>
+            <point key="canvasLocation" x="1262" y="-494"/>
         </scene>
     </scenes>
     <classes>
@@ -387,4 +388,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="OdR-Tb-2H9"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -59,7 +59,7 @@
     
     //add delete button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-   // self.navigationItem.leftBarButtonItem.title = @"DEL";
+    self.navigationItem.leftBarButtonItem.title = @"Del";
    
     
 }
