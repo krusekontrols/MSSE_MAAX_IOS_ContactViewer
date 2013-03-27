@@ -108,10 +108,10 @@
     [alert show];
     
     //test editing the list
-    Contact *ct = [Contact alloc];
-    ct.name = @"Bobby2";
-    ct.Phone = @"222";
-    [contacts editContactAtIndex:(1) witContact:(ct)];
+//    Contact *ct = [Contact alloc];
+//    ct.name = @"Bobby2";
+//    ct.Phone = @"222";
+//    [contacts editContactAtIndex:(1) witContact:(ct)];
     
 }
 
@@ -194,8 +194,11 @@
         DetailViewController *detailController = segue.destinationViewController;
         Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
         detailController.detailItem = ct;
-        detailController.contacts = contacts;
         
+        //set the index # in contacts instance
+        contacts.currentActiveIndex = self.tableView.indexPathForSelectedRow.row;
+        detailController.contacts = contacts;
+       // 
     }
     
     

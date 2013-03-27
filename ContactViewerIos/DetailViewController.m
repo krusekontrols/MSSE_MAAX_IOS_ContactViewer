@@ -87,6 +87,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //update here
+    
+    self.detailItem = [self.contacts contactAtIndex:self.contacts.currentActiveIndex];
+    
+    self.detailName.text = [self.detailItem name];
+    self.detailPhone.text = [self.detailItem phone];
+    self.detailTitle.text = [self.detailItem title];
+    self.detailEmail.text = [self.detailItem email];
+    self.detailTwitterId.text = [self.detailItem twitterId];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated

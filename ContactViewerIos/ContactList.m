@@ -9,10 +9,13 @@
 #import "ContactList.h"
 
 static ContactList* _singleton = nil;
+static int activeCurrent = -1;
 
 @implementation ContactList
 
 @synthesize allContacts=_contacts;
+
+//@synthesize currentActiveIndex = _currentActiveIndex;
 
 -(id)initWithCapacity:(NSInteger)capacity {
     self = [super init];
@@ -84,10 +87,20 @@ static ContactList* _singleton = nil;
 }
 
 -(void)editContactAtIndex:(NSInteger)index
-               witContact:(Contact*)newcontact{
+               withContact:(Contact*)newcontact{
     
     [_contacts removeObjectAtIndex:(index)];
     [_contacts insertObject:newcontact atIndex:(index)];
 
+}
+
+-(NSInteger)currentActiveIndex
+{
+    return activeCurrent;
+}
+
+-(void)setCurrentActiveIndex:(NSInteger)index
+{
+    activeCurrent = index;
 }
 @end

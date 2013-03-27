@@ -70,7 +70,6 @@
                                                     message:nam2 //@"You need to do something here"
                                                    delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alert show];
-
     
     ///TODO  - need to save the edited value here!
     Contact *ct = [Contact alloc];
@@ -85,7 +84,8 @@
     
     ///Todo get the right index:!!!!!!!!!
 
-    [self.contacts editContactAtIndex:(1) witContact:(ct)];
+ //   [self.contacts editContactAtIndex:(1) witContact:(ct)];
+    [self.contacts editContactAtIndex:(self.contacts.currentActiveIndex) withContact:(ct)];
     
  /*       if (self.detailItem) {
           
