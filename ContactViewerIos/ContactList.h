@@ -33,4 +33,6 @@
 -(NSInteger)currentActiveIndex;
 -(void)setCurrentActiveIndex:(NSInteger)index;
 
+-(void)removeContactAtIndex:(NSInteger)index ;
+
 @end

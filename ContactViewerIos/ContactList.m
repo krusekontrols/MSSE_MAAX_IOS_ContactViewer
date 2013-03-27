@@ -94,6 +94,13 @@ static int activeCurrent = -1;
 
 }
 
+-(void)removeContactAtIndex:(NSInteger)index {
+    
+    [_contacts removeObjectAtIndex:(index)];
+   
+}
+
+
 -(NSInteger)currentActiveIndex
 {
     return activeCurrent;

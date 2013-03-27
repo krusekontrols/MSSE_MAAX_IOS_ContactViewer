@@ -56,6 +56,12 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
+    
+    //add delete button
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+   // self.navigationItem.leftBarButtonItem.title = @"DEL";
+   
+    
 }
 
 - (void)viewDidUnload
@@ -109,7 +115,7 @@
     
     //test editing the list
 //    Contact *ct = [Contact alloc];
-//    ct.name = @"Bobby2";
+//    ct.name = @"Bob2";
 //    ct.Phone = @"222";
 //    [contacts editContactAtIndex:(1) witContact:(ct)];
     
@@ -161,12 +167,18 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [contacts removeContactAtIndex:indexPath.row];
+
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source.
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
+    
+    
+    }
 }
 
 
