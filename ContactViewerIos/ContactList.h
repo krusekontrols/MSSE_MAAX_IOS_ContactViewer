@@ -27,4 +27,9 @@
 
 @property(strong) NSMutableArray* allContacts;
 
+-(void)editContactAtIndex:(NSInteger)index
+                  witContact:(Contact*)newcontact  ;
+
+//-(NSInteger)currentActive;
+
 @end

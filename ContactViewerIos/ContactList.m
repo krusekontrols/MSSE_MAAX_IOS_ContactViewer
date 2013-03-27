@@ -14,7 +14,6 @@ static ContactList* _singleton = nil;
 
 @synthesize allContacts=_contacts;
 
-
 -(id)initWithCapacity:(NSInteger)capacity {
     self = [super init];
     _contacts = [[NSMutableArray alloc] initWithCapacity:capacity];
@@ -84,4 +83,11 @@ static ContactList* _singleton = nil;
     return [_contacts count];
 }
 
+-(void)editContactAtIndex:(NSInteger)index
+               witContact:(Contact*)newcontact{
+    
+    [_contacts removeObjectAtIndex:(index)];
+    [_contacts insertObject:newcontact atIndex:(index)];
+
+}
 @end

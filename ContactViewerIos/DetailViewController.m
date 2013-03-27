@@ -21,6 +21,8 @@
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize editViewController = _editViewController;
 
+@synthesize contacts = _contacts;
+
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem
@@ -64,6 +66,8 @@
     [self configureView];
     
     self.editViewController = (EditViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    self.contacts = _contacts;
 }
 
 - (void)viewDidUnload
@@ -135,6 +139,7 @@
         DetailViewController *detailController = segue.destinationViewController;
         //Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
         detailController.detailItem = self.detailItem;
+        detailController.contacts = self.contacts;
     }
     
     

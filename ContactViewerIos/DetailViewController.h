@@ -13,6 +13,7 @@
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) Contact *detailItem;
+@property (strong, nonatomic) ContactList *contacts;
 
 @property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailName;

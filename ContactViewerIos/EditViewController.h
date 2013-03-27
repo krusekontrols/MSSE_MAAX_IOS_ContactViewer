@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "contact.h"
+#import "ContactList.h"
+
 
 @interface EditViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) Contact *detailItem;
+@property (strong, nonatomic) ContactList* contacts;
 
 @property (strong, nonatomic) IBOutlet UITextField *detailDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextField *detailName;

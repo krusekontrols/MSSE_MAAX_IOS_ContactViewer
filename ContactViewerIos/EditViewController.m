@@ -17,6 +17,7 @@
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 
+@synthesize contacts = _contacts;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -62,7 +63,7 @@
 -(IBAction)onSaveContact:(id)sender {
  
 
-    NSString *nam = [self.detailItem name];
+  //  NSString *nam = [self.detailItem name];
     NSString *nam2 = self.detailName.text ;
     
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"save Contact"
@@ -71,11 +72,20 @@
     [alert show];
 
     
-    ///TODO  - need to save the edited value here! HOW?
+    ///TODO  - need to save the edited value here!
+    Contact *ct = [Contact alloc];
+
+    if (ct) {
+        ct.name = self.detailName.text ;
+        ct.Phone = self.detailPhone.text ;
+        ct.title = self.detailTitle.text ;
+        ct.email = self.detailEmail.text ;
+        ct.twitterId = self.detailTwitterId.text;
+    }
     
-    
-        // [self.detailItem name] = self.detailName.text ;
-  
+    ///Todo get the right index:!!!!!!!!!
+
+    [self.contacts editContactAtIndex:(1) witContact:(ct)];
     
  /*       if (self.detailItem) {
           
