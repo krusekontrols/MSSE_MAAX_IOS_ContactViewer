@@ -1,8 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<array>
 <dict>
-	<key>New item</key>
-	<string></string>
+	<key>name</key>
+	<string>Malcom Reynolds</string>
+	<key>phone</key>
+	<string>612-555-1234</string>
+	<key>title</key>
+	<string>Captain</string>
+	<key>email</key>
+	<string>mal@serenity.com</string>
+	<key>twitterId</key>
+	<string>malcomreynolds</string>
 </dict>
+<dict>
+	<key>name</key>
+	<string>Zoe Washburne</string>
+	<key>phone</key>
+	<string>612-555-5678</string>
+	<key>title</key>
+	<string>First Mate</string>
+	<key>email</key>
+	<string>zoe@serenity.com</string>
+	<key>twitterId</key>
+	<string>zoewashburne</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>Hoban Washburne</string>
+	<key>phone</key>
+	<string>612-555-9012</string>
+	<key>title</key>
+	<string>Pilot</string>
+	<key>email</key>
+	<string>wash@serenity.com</string>
+	<key>twitterId</key>
+	<string>wash</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>Jayne Cobb</string>
+	<key>phone</key>
+	<string>612-555-1234</string>
+	<key>title</key>
+	<string>Muscle</string>
+	<key>email</key>
+	<string>jayne@serenity.com</string>
+	<key>twitterId</key>
+	<string>heroofcanton</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>Kaylee Frye</string>
+	<key>phone</key>
+	<string>612-555-7890</string>
+	<key>title</key>
+	<string>Engineer</string>
+	<key>email</key>
+	<string>kaylee@serenity.com</string>
+	<key>twitterId</key>
+	<string>kaylee</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>Simon Tam</string>
+	<key>phone</key>
+	<string>612-555-4321</string>
+	<key>title</key>
+	<string>Doctor</string>
+	<key>email</key>
+	<string>simon@serenity.com</string>
+	<key>twitterId</key>
+	<string>simontam</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>River Tam</string>
+	<key>phone</key>
+	<string>612-555-8765</string>
+	<key>title</key>
+	<string>Doctor's Sister</string>
+	<key>email</key>
+	<string>river@serenity.com</string>
+	<key>twitterId</key>
+	<string>miranda</string>
+</dict>
+<dict>
+	<key>name</key>
+	<string>Shepherd Book</string>
+	<key>phone</key>
+	<string>612-555-2109</string>
+	<key>title</key>
+	<string>Shepherd</string>
+	<key>email</key>
+	<string>shepherd@serenity.com</string>
+	<key>twitterId</key>
+	<string>shepherdbook</string>
+</dict>
+</array>
 </plist>

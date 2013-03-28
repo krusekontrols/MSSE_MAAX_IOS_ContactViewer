@@ -26,48 +26,43 @@ static int activeCurrent = -1;
 //TODO Need a data store we can edit and save.
 
 +(void)initSingleton {
-    _singleton = [[ContactList alloc] initWithCapacity:8];
+    // Data.plist code
+    // get paths from root direcory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    // get documents path
+    NSString *documentsPath = [paths objectAtIndex:0];
+    // get the path to our Data/plist file
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"contacts.plist"];
     
-   [_singleton addContact:[[Contact alloc] initWithName:@"Malcom Reynolds"
-                                            andPhone:@"612-555-1234"
-                                            andTitle:@"Captain"
-                                            andEmail:@"mal@serenity.com"
-                                           andTwitterId:@"malcomreynolds"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Zoe Washburne"
-                                                andPhone:@"612-555-5678"
-                                                andTitle:@"First Mate"
-                                                andEmail:@"zoe@serenity.com"
-                                            andTwitterId:@"zoewashburne"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Hoban Washburne"
-                                                andPhone:@"612-555-9012"
-                                                andTitle:@"Pilot"
-                                                andEmail:@"wash@serenity.com"
-                                            andTwitterId:@"wash"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Jayne Cobb"
-                                                andPhone:@"612-555-1234"
-                                                andTitle:@"Muscle"
-                                                andEmail:@"jayne@serenity.com"
-                                            andTwitterId:@"heroofcanton"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Kaylee Frye"
-                                                andPhone:@"612-555-7890"
-                                                andTitle:@"Engineer"
-                                                andEmail:@"kaylee@serenity.com"
-                                            andTwitterId:@"kaylee"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Simon Tam"
-                                                andPhone:@"612-555-4321"
-                                                andTitle:@"Doctor"
-                                                andEmail:@"simon@serenity.com"
-                                            andTwitterId:@"simontam"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"River Tam"
-                                                andPhone:@"612-555-8765"
-                                                andTitle:@"Doctor's Sister"
-                                                andEmail:@"river@serenity.com"
-                                            andTwitterId:@"miranda"]];
-    [_singleton addContact:[[Contact alloc] initWithName:@"Shepherd Book"
-                                                andPhone:@"612-555-2109"
-                                                andTitle:@"Shepherd"
-                                                andEmail:@"shepherd@serenity.com"
-                                            andTwitterId:@"shepherdbook"]];
+    // check to see if Data.plist exists in documents
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+    {
+        // if not in documents, get property list from main bundle
+        plistPath = [[NSBundle mainBundle] pathForResource:@"contacts" ofType:@"plist"];
+    }
+    
+    // read property list into memory as an NSData object
+    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    NSString *errorDesc = nil;
+    NSPropertyListFormat format;
+    // convert static property liost into dictionary object
+    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
+    
+    
+    if (!temp)
+    {
+        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+    }
+    
+    _singleton = [[ContactList alloc] initWithCapacity:[temp count]];
+    
+    for (NSDictionary *key in temp) {
+        [_singleton addContact:[[Contact alloc] initWithName:[key objectForKey:@"name"]
+                                                    andPhone:[key objectForKey:@"phone"]
+                                                    andTitle:[key objectForKey:@"title"]
+                                                    andEmail:[key objectForKey:@"email"]
+                                                andTwitterId:[key objectForKey:@"twitterId"]]];
+    }
 }
 
 -(void)addContact:(Contact*)contact {
