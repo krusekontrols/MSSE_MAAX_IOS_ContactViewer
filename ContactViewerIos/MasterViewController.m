@@ -60,9 +60,20 @@
     //add delete button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.navigationItem.leftBarButtonItem.title = @"Del";
-   
-    
 }
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    // Make sure you call super first
+    [super setEditing:editing animated:animated];
+    
+    if (!editing)
+    {
+        self.editButtonItem.title = @"Del";
+    }
+}
+
+
 
 - (void)viewDidUnload
 {
