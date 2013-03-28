@@ -223,6 +223,10 @@
         detailController.contacts = contacts;
        // 
     }
+    else if([identifier isEqualToString:@"showDetail"]) {
+        
+        
+    }
     
     
 }
