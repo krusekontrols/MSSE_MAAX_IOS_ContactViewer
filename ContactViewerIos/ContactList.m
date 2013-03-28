@@ -46,7 +46,7 @@ static int activeCurrent = -1;
     NSString *errorDesc = nil;
     NSPropertyListFormat format;
     // convert static property liost into dictionary object
-    NSArray *temp = (NSArray *)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
+    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
     
     
     if (!temp)
@@ -54,14 +54,16 @@ static int activeCurrent = -1;
         NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
     }
     
+    NSLog(plistPath);
+    
     _singleton = [[ContactList alloc] initWithCapacity:[temp count]];
     
-    for (NSDictionary *key in temp) {
-        [_singleton addContact:[[Contact alloc] initWithName:[key objectForKey:@"name"]
-                                                    andPhone:[key objectForKey:@"phone"]
-                                                    andTitle:[key objectForKey:@"title"]
-                                                    andEmail:[key objectForKey:@"email"]
-                                                andTwitterId:[key objectForKey:@"twitterId"]]];
+    for (NSDictionary *thisContactDict in [temp objectForKey:@"root"]) {
+        [_singleton addContact:[[Contact alloc] initWithName:[thisContactDict objectForKey:@"name"]
+                                                    andPhone:[thisContactDict objectForKey:@"phone"]
+                                                    andTitle:[thisContactDict objectForKey:@"title"]
+                                                    andEmail:[thisContactDict objectForKey:@"email"]
+                                                andTwitterId:[thisContactDict objectForKey:@"twitterId"]]];
     }
 }
 
@@ -82,17 +84,16 @@ static int activeCurrent = -1;
 }
 
 -(void)editContactAtIndex:(NSInteger)index
-               withContact:(Contact*)newcontact{
+              withContact:(Contact*)newcontact{
     
     [_contacts removeObjectAtIndex:(index)];
     [_contacts insertObject:newcontact atIndex:(index)];
-
 }
 
 -(void)removeContactAtIndex:(NSInteger)index {
     
     [_contacts removeObjectAtIndex:(index)];
-   
+    
 }
 
 
@@ -105,4 +106,46 @@ static int activeCurrent = -1;
 {
     activeCurrent = index;
 }
+
+
+-(void)saveContactList
+{
+    NSMutableDictionary *toSave = [[NSMutableDictionary alloc] init];
+    NSMutableArray *dictArray = [[NSMutableArray alloc] init];
+   
+    for (int x = 0;x < [_contacts count]; x++)
+    {
+        Contact *thisContact = [_contacts objectAtIndex:x];
+        NSMutableDictionary *thisDict = [[NSMutableDictionary alloc] init];
+        [thisDict setObject:thisContact.name forKey:@"name"];
+        [thisDict setObject:thisContact.phone forKey:@"phone"];
+        [thisDict setObject:thisContact.title forKey:@"title"];
+        [thisDict setObject:thisContact.email forKey:@"email"];
+        [thisDict setObject:thisContact.twitterId forKey:@"twitterId"];
+        [dictArray addObject:thisDict];
+
+    }
+    [toSave setObject:dictArray forKey:@"root"];
+    
+    // Data.plist code
+    // get paths from root direcory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    // get documents path
+    NSString *documentsPath = [paths objectAtIndex:0];
+    // get the path to our Data/plist file
+    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"contacts.plist"];
+    
+    // check to see if Data.plist exists in documents
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
+    {
+        // if not in documents, get property list from main bundle
+        plistPath = [[NSBundle mainBundle] pathForResource:@"contacts" ofType:@"plist"];
+    }
+    
+    NSLog(plistPath);
+
+    if ([toSave writeToFile:plistPath atomically:YES]) NSLog(@"success");
+    else NSLog(@"failed");
+}
+
 @end

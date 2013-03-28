@@ -85,8 +85,16 @@
     ///Todo get the right index:!!!!!!!!!
 
  //   [self.contacts editContactAtIndex:(1) witContact:(ct)];
-    [self.contacts editContactAtIndex:(self.contacts.currentActiveIndex) withContact:(ct)];
+    if(self.contacts.currentActiveIndex > -1)
+    {
+        [self.contacts editContactAtIndex:(self.contacts.currentActiveIndex) withContact:(ct)];
+    }
+    else
+    {
+        [self.contacts addContact:ct];
+    }
     
+    [self.contacts saveContactList];
  /*       if (self.detailItem) {
           
             [self setDetailName:self.detailName];

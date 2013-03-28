@@ -178,11 +178,12 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [contacts removeContactAtIndex:indexPath.row];
-
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source.
+        [contacts removeContactAtIndex:indexPath.row];
+        [contacts saveContactList];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
     
          
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -212,23 +213,20 @@
 {
     NSString *identifier = segue.identifier;
     
-    if([identifier isEqualToString:@"showDetail"])
-    {
+   
         DetailViewController *detailController = segue.destinationViewController;
-        Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
-        detailController.detailItem = ct;
+        if([identifier isEqualToString:@"showDetail"])
+        {
+            Contact *ct = [contacts contactAtIndex:self.tableView.indexPathForSelectedRow.row];
+            detailController.detailItem = ct;
         
-        //set the index # in contacts instance
-        contacts.currentActiveIndex = self.tableView.indexPathForSelectedRow.row;
+            //set the index # in contacts instance
+            contacts.currentActiveIndex = self.tableView.indexPathForSelectedRow.row;
+        }
+        else {
+             contacts.currentActiveIndex = -1;
+        }
         detailController.contacts = contacts;
-       // 
-    }
-    else if([identifier isEqualToString:@"showDetail"]) {
-        
-        
-    }
-    
-    
 }
 
 @end
