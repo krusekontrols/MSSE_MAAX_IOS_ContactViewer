@@ -22,6 +22,6 @@
 @property (strong, nonatomic) ContactList* contacts;
 
 // this gets called when the user taps the plus button above the list
--(IBAction)onAddContact:(id)sender;
+//-(IBAction)onAddContact:(id)sender;
 
 @end

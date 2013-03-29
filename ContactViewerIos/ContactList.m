@@ -135,13 +135,6 @@ static int activeCurrent = -1;
     // get the path to our Data/plist file
     NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"contacts.plist"];
     
-    // check to see if Data.plist exists in documents
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
-        // if not in documents, get property list from main bundle
-        plistPath = [[NSBundle mainBundle] pathForResource:@"contacts" ofType:@"plist"];
-    }
-    
     NSLog(plistPath);
 
     if ([toSave writeToFile:plistPath atomically:YES]) NSLog(@"success");
