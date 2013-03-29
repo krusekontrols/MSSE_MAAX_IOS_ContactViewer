@@ -197,22 +197,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Contact Detail" id="26">
                         <barButtonItem key="backBarButtonItem" title="Home" id="UiG-4M-9we"/>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="eep-BV-X8e">
-                            <button key="customView" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tA4-Wo-pQn">
-                                <rect key="frame" x="245" y="7" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Edit">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="0cB-Tw-dOD" kind="push" identifier="showEdit" id="uK8-E9-AM9"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="uhE-Bb-Ey8">
+                            <color key="tintColor" red="0.99049524349999996" green="1" blue="0.22758474440000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="0cB-Tw-dOD" kind="push" identifier="showEdit" id="Q5N-YK-b7h"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -358,6 +347,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="OdR-Tb-2H9"/>
+        <segue reference="Q5N-YK-b7h"/>
     </inferredMetricsTieBreakers>
 </document>

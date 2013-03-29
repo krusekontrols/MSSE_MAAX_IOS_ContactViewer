@@ -66,7 +66,7 @@
   //  NSString *nam = [self.detailItem name];
     NSString *nam2 = self.detailName.text ;
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"save Contact"
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"save contact"
                                                     message:nam2 //@"You need to do something here"
                                                    delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alert show];
