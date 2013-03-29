@@ -117,21 +117,14 @@
 
 
 #pragma mark - Table View Data Source
-
+/*
 -(IBAction)onAddContact:(id)sender {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"New Contact"
                                                     message:@"You need to do something here"
                                                    delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [alert show];
-    
-    //test editing the list
-//    Contact *ct = [Contact alloc];
-//    ct.name = @"Bob2";
-//    ct.Phone = @"222";
-//    [contacts editContactAtIndex:(1) witContact:(ct)];
-    
 }
-
+*/
 
 #pragma mark - Table View Data Source
 

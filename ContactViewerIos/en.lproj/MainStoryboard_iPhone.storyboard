@@ -69,7 +69,6 @@
                     <navigationItem key="navigationItem" title="Contact Viewer" id="35">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ih-1o-IbV">
                             <connections>
-                                <action selector="onAddContact:" destination="12" id="jsa-Z6-qSu"/>
                                 <segue destination="0cB-Tw-dOD" kind="push" identifier="adddEdit" id="OdR-Tb-2H9"/>
                             </connections>
                         </barButtonItem>
@@ -341,12 +340,43 @@
             <point key="canvasLocation" x="1262" y="-494"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailEmail" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailPhone" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="detailTwitterId" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="EditViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EditViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onSaveContact:"/>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailEmail" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailPhone" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailTitle" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="detailTwitterId" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onAddContact:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Q5N-YK-b7h"/>
+        <segue reference="OdR-Tb-2H9"/>
     </inferredMetricsTieBreakers>
 </document>
