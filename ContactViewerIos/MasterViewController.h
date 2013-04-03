@@ -16,6 +16,7 @@
 
 @interface MasterViewController : UITableViewController <UITableViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @property (strong, nonatomic) DetailViewController *detailViewController;
 @property (strong, nonatomic) EditViewController *editViewController;
 

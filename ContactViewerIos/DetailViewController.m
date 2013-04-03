@@ -68,6 +68,11 @@
     self.editViewController = (EditViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     self.contacts = _contacts;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(issueGetRequest)
+                                                 name:@"detailReloadRequest"
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -80,8 +85,46 @@
     [self setDetailTwitterId:nil];
     [self setDetailTitle:nil];
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)issueGetRequest
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* url = [NSURL URLWithString:
+                      [NSString stringWithFormat:@"http://contacts.tinyapollo.com/contacts/%@?key=maax",
+                       self.detailItem._id]];
+        
+        // create the request!
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"GET"];
+        // get the response!
+        NSHTTPURLResponse *reponse = nil;
+        NSError* error = [[NSError alloc] init];
+        NSData* responseData = [NSURLConnection sendSynchronousRequest:request
+                                                     returningResponse:&reponse error:&error];
+        
+        NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        
+        [self performSelectorOnMainThread:@selector(receiveData:) withObject:responseDict waitUntilDone:YES];
+        
+      });
+}
+
+
+- (void)receiveData:(NSDictionary *)responseDict {
+    NSDictionary * thisContactDict = [responseDict objectForKey:@"contact"];
+    Contact* thisContact = [[Contact alloc] initWithName:[thisContactDict objectForKey:@"name"]
+                                                andPhone:[thisContactDict objectForKey:@"phone"]
+                                                andTitle:[thisContactDict objectForKey:@"title"]
+                                                andEmail:[thisContactDict objectForKey:@"email"]
+                                            andTwitterId:[thisContactDict objectForKey:@"twitterId"]
+                                                   andId:[thisContactDict objectForKey:@"_id"]];
+    [self setDetailItem:thisContact];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -112,6 +155,9 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+    NSNotification *notif = [NSNotification notificationWithName:@"masterReloadRequest" object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

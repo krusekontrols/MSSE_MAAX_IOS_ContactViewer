@@ -55,10 +55,98 @@
     [self setDetailTitle:nil];
     [self setDetailTwitterId:nil];
     [self setDetailTitle:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+    
+    
+    if(self.contacts.currentActiveIndex > -1)
+    {
+        NSNotification *notif = [NSNotification notificationWithName:@"detailReloadRequest" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
+    }
+    else
+    {
+        NSNotification *notif = [NSNotification notificationWithName:@"masterReloadRequest" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
+    }
+}
+
+
+- (void)issuePutRequest: (Contact *) contact
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* url = [NSURL URLWithString:
+                      [NSString stringWithFormat:@"http://contacts.tinyapollo.com/contacts/%@?key=maax",
+                       self.detailItem._id]];
+        
+        // create the request!
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"PUT"];
+        [request addValue:@"application/x-www-form-urlencoded"
+       forHTTPHeaderField:@"Content-Type"];
+        NSString *putData = [NSString stringWithFormat:@"name=%@&phone=%@&title=%@&email=%@&twitterId=%@",
+                             contact.name, contact.phone, contact.title, contact.email, contact.twitterId];
+        NSString *length = [NSString stringWithFormat:@"%d", [putData length]];
+        [request setValue:length forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:[putData dataUsingEncoding:NSASCIIStringEncoding]];
+        
+        // get the response!
+        NSHTTPURLResponse *reponse = nil;
+        NSError* error = [[NSError alloc] init];
+        NSData* responseData =[NSURLConnection sendSynchronousRequest:request
+                              returningResponse:&reponse error:&error];
+        NSLog([[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+        
+    });
+}
+
+- (void)issuePostRequest: (Contact *) contact
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* url = [NSURL URLWithString:
+                      [NSString stringWithFormat:@"http://contacts.tinyapollo.com/contacts?key=maax"]];
+        
+        // create the request!
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request addValue:@"application/x-www-form-urlencoded"
+       forHTTPHeaderField:@"Content-Type"];
+        NSString *postData = [NSString stringWithFormat:@"name=%@&phone=%@&title=%@&email=%@&twitterId=%@",
+                             contact.name, contact.phone, contact.title, contact.email, contact.twitterId];
+        NSString *length = [NSString stringWithFormat:@"%d", [postData length]];
+        [request setValue:length forHTTPHeaderField:@"Content-Length"];
+        [request setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
+        
+        // get the response!
+        NSHTTPURLResponse *reponse = nil;
+        NSError* error = [[NSError alloc] init];
+        NSData* responseData =[NSURLConnection sendSynchronousRequest:request
+                                                    returningResponse:&reponse error:&error];
+        NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        
+        NSDictionary * thisContactDict = [responseDict objectForKey:@"contact"];
+        Contact* thisContact = [[Contact alloc] initWithName:[thisContactDict objectForKey:@"name"]
+                                                    andPhone:[thisContactDict objectForKey:@"phone"]
+                                                    andTitle:[thisContactDict objectForKey:@"title"]
+                                                    andEmail:[thisContactDict objectForKey:@"email"]
+                                                andTwitterId:[thisContactDict objectForKey:@"twitterId"]
+                                                       andId:[thisContactDict objectForKey:@"_id"]];
+        [self setDetailItem:thisContact];
+        
+        NSLog([[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+        
+    });
+}
+
 
 -(IBAction)onSaveContact:(id)sender {
  
@@ -81,16 +169,16 @@
         ct.twitterId = self.detailTwitterId.text;
     }
     
-    if(self.contacts.currentActiveIndex > -1)
+    if(self.contacts.currentActiveIndex > -1 || self.detailItem)
     {
-        [self.contacts editContactAtIndex:(self.contacts.currentActiveIndex) withContact:(ct)];
+        [self issuePutRequest: ct];
     }
     else
     {
-        [self.contacts addContact:ct];
+        [self issuePostRequest: ct];
     }
     
-    [self.contacts saveContactList];
+    //[self.contacts saveContactList];
 }
 
 - (void)didReceiveMemoryWarning

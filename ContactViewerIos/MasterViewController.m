@@ -21,19 +21,67 @@
 //mek?
 @synthesize editViewController = _editViewController;
 
+@synthesize myTableView;
 @synthesize contacts;
 
 - (void)awakeFromNib
 {
     // get the contact list
-    [ContactList initSingleton];
-    contacts = [ContactList singleton];
+    
+    [self issueGetRequest];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
         self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     }
     [super awakeFromNib];
+}
+
+
+- (void)issueGetRequest
+{
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[ NSURL URLWithString: [ NSString stringWithFormat: @"http://contacts.tinyapollo.com/contacts?key=maax"] ]];
+        [request setHTTPMethod:@"GET"];
+        // get the response!
+        NSHTTPURLResponse *reponse = nil;
+        NSError* error = [[NSError alloc] init];
+        NSData* responseData = [NSURLConnection sendSynchronousRequest:request
+                                                     returningResponse:&reponse error:&error];
+        
+        NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        
+        [self performSelectorOnMainThread:@selector(receiveData:) withObject:responseDict waitUntilDone:YES];
+    });
+}
+
+
+- (void)receiveData:(NSDictionary *)responseDict {
+    [ContactList initSingleton: responseDict];
+    contacts = [ContactList singleton];
+    [self.myTableView reloadData];
+}
+
+- (void)issueDeleteRequest: (NSString *) contactId
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* url = [NSURL URLWithString:
+                      [NSString stringWithFormat:@"http://contacts.tinyapollo.com/contacts/%@?key=maax",
+                       contactId]];
+                       
+        // create the request!
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+                       [request setURL:url];
+        [request setHTTPMethod:@"DELETE"];
+        // get the response!
+        NSHTTPURLResponse *reponse = nil;
+        NSError* error = [[NSError alloc] init];
+        [NSURLConnection sendSynchronousRequest:request
+                                                     returningResponse:&reponse error:&error];
+        
+        [self issueGetRequest];
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +108,11 @@
     //add delete button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.navigationItem.leftBarButtonItem.title = @"Del";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(issueGetRequest)
+                                                 name:@"masterReloadRequest"
+                                               object:nil];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -77,7 +130,9 @@
 
 - (void)viewDidUnload
 {
+    [self setMyTableView:nil];
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -173,9 +228,11 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source.
-        [contacts removeContactAtIndex:indexPath.row];
-        [contacts saveContactList];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Contact* contact = [contacts contactAtIndex:indexPath.row];
+        [self issueDeleteRequest:contact._id];
+        //[contacts removeContactAtIndex:indexPath.row];
+        //[contacts saveContactList];
+        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
     
          
@@ -185,7 +242,6 @@
     
     }
 }
-
 
 
 // Override to support rearranging the table view.

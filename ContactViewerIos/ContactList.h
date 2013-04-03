@@ -13,7 +13,7 @@
 @interface ContactList : NSObject
 
 // initializes the singleton instance
-+(void)initSingleton;
++(void)initSingleton : (NSDictionary *) responseDict;
 
 +(ContactList*)singleton;
 

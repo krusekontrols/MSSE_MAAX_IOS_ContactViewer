@@ -16,7 +16,8 @@
         andPhone:(NSString*)newPhone
         andTitle:(NSString*)newTitle 
         andEmail:(NSString*)newEmail
-        andTwitterId:(NSString*)newTwitterId {
+        andTwitterId:(NSString*)newTwitterId
+        andId:(NSString*) newid {
     
     self = [super init];
     
@@ -25,6 +26,7 @@
     self.title = newTitle;
     self.email = newEmail;
     self.twitterId = newTwitterId;
+    self._id = newid;
     
     return self;
 }

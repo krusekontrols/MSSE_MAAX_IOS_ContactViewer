@@ -25,45 +25,17 @@ static int activeCurrent = -1;
 
 //TODO Need a data store we can edit and save.
 
-+(void)initSingleton {
-    // Data.plist code
-    // get paths from root direcory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    // get documents path
-    NSString *documentsPath = [paths objectAtIndex:0];
-    // get the path to our Data/plist file
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"contacts.plist"];
++(void)initSingleton: (NSDictionary *) responseDict{
+
+    _singleton = [[ContactList alloc] initWithCapacity:[[responseDict objectForKey:@"contacts"] count]];
     
-    // check to see if Data.plist exists in documents
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath])
-    {
-        // if not in documents, get property list from main bundle
-        plistPath = [[NSBundle mainBundle] pathForResource:@"contacts" ofType:@"plist"];
-    }
-    
-    // read property list into memory as an NSData object
-    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-    NSString *errorDesc = nil;
-    NSPropertyListFormat format;
-    // convert static property liost into dictionary object
-    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization propertyListFromData:plistXML mutabilityOption:NSPropertyListMutableContainersAndLeaves format:&format errorDescription:&errorDesc];
-    
-    
-    if (!temp)
-    {
-        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
-    }
-    
-    NSLog(plistPath);
-    
-    _singleton = [[ContactList alloc] initWithCapacity:[temp count]];
-    
-    for (NSDictionary *thisContactDict in [temp objectForKey:@"root"]) {
+    for (NSDictionary *thisContactDict in [responseDict objectForKey:@"contacts"]) {
         [_singleton addContact:[[Contact alloc] initWithName:[thisContactDict objectForKey:@"name"]
                                                     andPhone:[thisContactDict objectForKey:@"phone"]
                                                     andTitle:[thisContactDict objectForKey:@"title"]
                                                     andEmail:[thisContactDict objectForKey:@"email"]
-                                                andTwitterId:[thisContactDict objectForKey:@"twitterId"]]];
+                                                andTwitterId:[thisContactDict objectForKey:@"twitterId"]
+                                                andId:[thisContactDict objectForKey:@"_id"]]];
     }
 }
 
@@ -108,7 +80,7 @@ static int activeCurrent = -1;
 }
 
 
--(void)saveContactList
+/*-(void)saveContactList
 {
     NSMutableDictionary *toSave = [[NSMutableDictionary alloc] init];
     NSMutableArray *dictArray = [[NSMutableArray alloc] init];
@@ -139,6 +111,6 @@ static int activeCurrent = -1;
 
     if ([toSave writeToFile:plistPath atomically:YES]) NSLog(@"success");
     else NSLog(@"failed");
-}
+}*/
 
 @end
