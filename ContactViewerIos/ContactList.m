@@ -79,38 +79,4 @@ static int activeCurrent = -1;
     activeCurrent = index;
 }
 
-
-/*-(void)saveContactList
-{
-    NSMutableDictionary *toSave = [[NSMutableDictionary alloc] init];
-    NSMutableArray *dictArray = [[NSMutableArray alloc] init];
-   
-    for (int x = 0;x < [_contacts count]; x++)
-    {
-        Contact *thisContact = [_contacts objectAtIndex:x];
-        NSMutableDictionary *thisDict = [[NSMutableDictionary alloc] init];
-        [thisDict setObject:thisContact.name forKey:@"name"];
-        [thisDict setObject:thisContact.phone forKey:@"phone"];
-        [thisDict setObject:thisContact.title forKey:@"title"];
-        [thisDict setObject:thisContact.email forKey:@"email"];
-        [thisDict setObject:thisContact.twitterId forKey:@"twitterId"];
-        [dictArray addObject:thisDict];
-
-    }
-    [toSave setObject:dictArray forKey:@"root"];
-    
-    // Data.plist code
-    // get paths from root direcory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    // get documents path
-    NSString *documentsPath = [paths objectAtIndex:0];
-    // get the path to our Data/plist file
-    NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"contacts.plist"];
-    
-    NSLog(plistPath);
-
-    if ([toSave writeToFile:plistPath atomically:YES]) NSLog(@"success");
-    else NSLog(@"failed");
-}*/
-
 @end

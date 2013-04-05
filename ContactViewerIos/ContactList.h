@@ -35,6 +35,4 @@
 
 -(void)removeContactAtIndex:(NSInteger)index ;
 
--(void)saveContactList;
-
 @end

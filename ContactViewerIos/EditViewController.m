@@ -101,9 +101,8 @@
         // get the response!
         NSHTTPURLResponse *reponse = nil;
         NSError* error = [[NSError alloc] init];
-        NSData* responseData =[NSURLConnection sendSynchronousRequest:request
-                              returningResponse:&reponse error:&error];
-        NSLog([[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
+        [NSURLConnection sendSynchronousRequest:request
+                      returningResponse:&reponse error:&error];
         
     });
 }
@@ -141,8 +140,6 @@
                                                 andTwitterId:[thisContactDict objectForKey:@"twitterId"]
                                                        andId:[thisContactDict objectForKey:@"_id"]];
         [self setDetailItem:thisContact];
-        
-        NSLog([[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding]);
         
     });
 }

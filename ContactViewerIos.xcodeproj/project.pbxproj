@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5EA84D8F170376D10040CC69 /* contacts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EA84D8E170376D10040CC69 /* contacts.plist */; };
 		5EED911C170219AF00264F67 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EED911B170219AF00264F67 /* EditViewController.m */; };
 		A1523E3D1507C4CC00AAD412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3C1507C4CC00AAD412 /* UIKit.framework */; };
 		A1523E3F1507C4CC00AAD412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3E1507C4CC00AAD412 /* Foundation.framework */; };
@@ -24,7 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5EA84D8E170376D10040CC69 /* contacts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = contacts.plist; sourceTree = "<group>"; };
 		5EED911A170219AF00264F67 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		5EED911B170219AF00264F67 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		A1523E381507C4CC00AAD412 /* ContactViewerIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactViewerIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +106,6 @@
 				A1523E601507D37A00AAD412 /* Contact.m */,
 				A17B9CE61507DB7D00DE386B /* ContactList.h */,
 				A17B9CE71507DB7D00DE386B /* ContactList.m */,
-				5EA84D8E170376D10040CC69 /* contacts.plist */,
 			);
 			path = ContactViewerIos;
 			sourceTree = "<group>";
@@ -178,7 +175,6 @@
 				A1523E471507C4CC00AAD412 /* InfoPlist.strings in Resources */,
 				A1523E501507C4CC00AAD412 /* MainStoryboard_iPhone.storyboard in Resources */,
 				A1523E531507C4CC00AAD412 /* MainStoryboard_iPad.storyboard in Resources */,
-				5EA84D8F170376D10040CC69 /* contacts.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
