@@ -61,6 +61,12 @@
     [ContactList initSingleton: responseDict];
     contacts = [ContactList singleton];
     [self.myTableView reloadData];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if([contacts count] > 0)
+        {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+        }
+    }
 }
 
 - (void)issueDeleteRequest: (NSString *) contactId
@@ -100,10 +106,6 @@
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     self.editViewController = (EditViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-    }
     
     //add delete button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
