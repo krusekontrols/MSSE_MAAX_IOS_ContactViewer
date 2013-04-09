@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22A7F3DF1713CB3F00C6CEA0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A7F3DE1713CB3F00C6CEA0 /* Default-568h@2x.png */; };
 		5EED911C170219AF00264F67 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EED911B170219AF00264F67 /* EditViewController.m */; };
 		A1523E3D1507C4CC00AAD412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3C1507C4CC00AAD412 /* UIKit.framework */; };
 		A1523E3F1507C4CC00AAD412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3E1507C4CC00AAD412 /* Foundation.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22A7F3DE1713CB3F00C6CEA0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5EED911A170219AF00264F67 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		5EED911B170219AF00264F67 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		A1523E381507C4CC00AAD412 /* ContactViewerIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactViewerIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +66,7 @@
 		A1523E2D1507C4CB00AAD412 = {
 			isa = PBXGroup;
 			children = (
+				22A7F3DE1713CB3F00C6CEA0 /* Default-568h@2x.png */,
 				A1523E421507C4CC00AAD412 /* ContactViewerIos */,
 				A1523E3B1507C4CC00AAD412 /* Frameworks */,
 				A1523E391507C4CC00AAD412 /* Products */,
@@ -175,6 +178,7 @@
 				A1523E471507C4CC00AAD412 /* InfoPlist.strings in Resources */,
 				A1523E501507C4CC00AAD412 /* MainStoryboard_iPhone.storyboard in Resources */,
 				A1523E531507C4CC00AAD412 /* MainStoryboard_iPad.storyboard in Resources */,
+				22A7F3DF1713CB3F00C6CEA0 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

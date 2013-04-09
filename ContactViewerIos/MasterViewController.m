@@ -21,7 +21,6 @@
 //mek?
 @synthesize editViewController = _editViewController;
 
-@synthesize myTableView;
 @synthesize contacts;
 
 - (void)awakeFromNib
@@ -60,11 +59,13 @@
 - (void)receiveData:(NSDictionary *)responseDict {
     [ContactList initSingleton: responseDict];
     contacts = [ContactList singleton];
-    [self.myTableView reloadData];
+    [self.tableView reloadData];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         if([contacts count] > 0)
         {
-            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+           [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+            self.detailViewController.detailItem = [contacts contactAtIndex:[NSIndexPath indexPathForRow:0 inSection:0].row];
+            
         }
     }
 }
@@ -132,7 +133,6 @@
 
 - (void)viewDidUnload
 {
-    [self setMyTableView:nil];
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     // Release any retained subviews of the main view.
@@ -171,17 +171,6 @@
         return YES;
     }
 }
-
-
-#pragma mark - Table View Data Source
-/*
--(IBAction)onAddContact:(id)sender {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"New Contact"
-                                                    message:@"You need to do something here"
-                                                   delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-    [alert show];
-}
-*/
 
 #pragma mark - Table View Data Source
 
@@ -262,7 +251,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSString *identifier = segue.identifier;
+        NSString *identifier = segue.identifier;
     
    
         DetailViewController *detailController = segue.destinationViewController;
